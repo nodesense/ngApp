@@ -1,14 +1,9 @@
 import { Observable } from 'rxjs';
 import { ProductService } from './../../services/product.service';
-import { Component, OnInit, ViewChild, OnDestroy, 
-    ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Product } from '../../models/product';
 import { Subscription } from 'rxjs';
-import { ProductsTableComponent } from '../products-table/products-table.component';
-import { ProductsGridComponent } from '../products-grid/products-grid.component';
-import { HostTemplateDirective } from '../../directives/host-template.directive';
-
-
+ 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -16,39 +11,40 @@ import { HostTemplateDirective } from '../../directives/host-template.directive'
 })
 export class ProductListComponent implements OnInit {
  
+  //cancel the pending calls
+
+  // observable, always use $ at the end, even for promise instance, it is good to have $
+
   products$:Observable<Product[]>;
 
-  @ViewChild(HostTemplateDirective)
-  hostDirective: HostTemplateDirective;
+  fields: string[] = ['year', 'price', 'weight'];
+  predicates: string[] = ['>', '<', '=='];
 
-  componentMap = {
-    "table": ProductsTableComponent,
-    "grid": ProductsGridComponent
-  }
-
-  constructor(private productService: ProductService, 
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+  // data binding/two way
+  selectedField: string;
+  selectedPredicate: string;
+  expectedValue: string | number;
+  // context, it is an array of product
+  // products: Product[]; // don't use any
+  // susbcription: Subscription;
+ 
+  constructor(private productService: ProductService ) { }
 
   ngOnInit() {
     this.products$ = this.productService.getProducts();
-    this.loadComponent('table');
-  } 
+    
+    // make api call
+    // to cancel the pending calls if any
+    // this.susbcription = this.productService.getProducts()
+    //     .subscribe ( products => {
+    //       this.products = products;
+    //     })
 
-  loadComponent(name: string) {
-    let componentFactory = this.componentFactoryResolver
-                                .resolveComponentFactory(this.componentMap[name]);
- 
-    let viewContainerRef = this.hostDirective.viewContainerRef;
-    //viewContainerRef.clear();
-
-    let componentRef = viewContainerRef.createComponent(componentFactory);
-
-
-    this.productService.getProducts()
-        .subscribe (products => {
-          (<ProductsGridComponent>componentRef.instance).products = products;
-
-        })
-
-  }
+   }
+  
+  // ngOnDestroy() {
+  //   if (this.susbcription) {
+  //     this.susbcription.unsubscribe(); // cancel the pending calls
+  //   }
+  // }
 }

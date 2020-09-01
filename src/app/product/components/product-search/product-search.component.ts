@@ -40,14 +40,16 @@ export class ProductSearchComponent implements OnInit {
 
     ngOnInit() {
         this.searchControl.valueChanges
-        .pipe (map ( (value:string) => value.trim()))
-        .pipe(filter (value => !!value))
-        .pipe(debounceTime(400))
+        .pipe (map ( (value:string) => value.trim())) //transform, remove white space around
+        .pipe(filter (value => !!value)) // only non empty string allowed further
+        .pipe(debounceTime(400)) // 300 to 600 ms, cooling for user to stop typing
         .subscribe( (value: string) => {
-            console.log("subscribe changed ", value, 
+            console.log("subscribe changed*" + value+ "*", 
                         " length ", value.length);
 
-            
+            // data binding in reactive forms, 
+            // before bind the data, validate the user input, fix the mistakes
+            // then apply the user input to model. 
             this.searchText = value;
             
             this.productService.searchProducts(this.searchText)

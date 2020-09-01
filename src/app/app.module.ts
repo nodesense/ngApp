@@ -36,10 +36,13 @@ const routes: Routes = [
         path: 'cart',
         component: CartComponent
     },
+    
     {
         path: 'products',
-        loadChildren: 'app/product/product.module#ProductModule'
+        loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
     },
+
+    
     {
         path: 'about',
         component: AboutComponent

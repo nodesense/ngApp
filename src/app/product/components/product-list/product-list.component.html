@@ -1,15 +1,62 @@
 <h2>Product List</h2>
 
+<form>
+  <label>Field</label>
+  <select name="field" [(ngModel)]="selectedField">
+    <option [value]="fieldName" 
+            *ngFor="let fieldName of fields" >
+        {{fieldName}}
+    </option>
+  </select>
 
-<select (change)="loadComponent($event.target.value)">
-    
-    <option value='table'>Table</option>
-    <option value='grid'>Grid</option>
-</select>
+  <label>Predicate</label>
+  <select name="predicate" [(ngModel)]="selectedPredicate">
+    <option [value]="predicate" 
+            *ngFor="let predicate of predicates" >
+        {{predicate}}
+    </option>
+  </select>
 
- 
+  <label>Value</label>
+  <input name="expected" [(ngModel)]="expectedValue" type="number" />
+</form>
 
-<!-- container -->
-<ng-template host-template>
+<div>
+  <p>Condition: {{selectedField}} {{selectedPredicate}} {{expectedValue}}</p>
+</div>
 
-</ng-template>
+<!--
+  susbcribe from rxjs, success func, not error
+   async pipe also unsubscribe
+  resolve promise, doesn't handle error/catch
+--> 
+
+<div *ngFor="let product of (products$ | async  | filter:selectedField:selectedPredicate:expectedValue)"
+     class="flex two"
+>
+   <app-product-widget [product]="product">
+
+   </app-product-widget>
+</div>  
+
+
+
+
+
+
+
+
+
+
+
+<!-- <select (change)="loadComponent($event.target.value)">
+  <option value='grid' selected>Grid</option>
+  <option value='table'>Table</option>
+</select> -->
+
+<!-- 
+<app-products-table [products]="(products$ | async)">
+
+</app-products-table> -->
+<!-- 
+<ng-template host-template ></ng-template> -->

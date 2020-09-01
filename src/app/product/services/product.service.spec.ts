@@ -1,8 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { HttpClientTestingModule, 
-        HttpTestingController } from '@angular/common/http/testing';
+        HttpTestingController // for mock purpose
+       } from '@angular/common/http/testing';
 
+// should not use HttpClientModule, as this is real implementation, shall make API call in test
 import {HttpClientModule} from '@angular/common/http';
 
 import { ProductService } from './product.service';
@@ -41,6 +43,7 @@ fdescribe('ProductService', () => {
  
   it('should return good response with data', (doneFn) => {
      console.log("TEstme ")
+     // calls shall be handled by mocks
     productService.getProducts()
                   .subscribe ( products => {
                     expect(products.length).toBe(2);
@@ -50,10 +53,12 @@ fdescribe('ProductService', () => {
                   });
                    
 
+    // mock the end point
     let productsRequest = httpMock.expectOne('http://localhost:7070/api/products');
+    // mock data for the API
     productsRequest.flush([{id: 1}, {id: 2}]);                
  
-    httpMock.verify();
+    httpMock.verify(); // run the expectations
   });
 
  
