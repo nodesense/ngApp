@@ -1,0 +1,39 @@
+<h2>Login</h2>
+
+
+<form [formGroup]="form" >
+
+Username
+  <input name="username" formControlName="username"
+
+  />
+
+Password
+
+  <input name="password" formControlName="password"
+
+  />
+
+
+</form>
+
+<p *ngIf="errorMessage">
+  Error: {{errorMessage}}
+</p>
+
+<p> Valid: {{form.valid}}</p>
+
+<button [disabled]="form.invalid" (click)="login()">
+  Login
+</button>
+
+
+<p>Available username/password</p>
+
+<ul>
+  <li>admin/admin</li>
+  <li>staff/staff</li>
+  <li>user/user</li>
+</ul>
+
+<p>or <b>use http://localhost:7070/api/users for registered user list</b></p>

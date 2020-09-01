@@ -1,0 +1,69 @@
+<!-- h2 is hosting directive aka host element -->
+
+<!-- <h2  appHighlight color="lightgreen"  >About</h2> -->
+
+
+<h2  [(appHighlight)]="myColor" #highlight1="appHighlight"  >About</h2>
+
+<p  appHighlight color="'light' + 'green'" #highlight2="appHighlight"  >About</p>
+
+<p>Color is {{highlight1.color}}</p> 
+
+<button (click)="highlight1.setColor('purple')">
+   Change Color
+</button>
+
+<!-- # template reference -->
+
+<!-- # template reference variable -->
+<ng-template #notShown>
+  <p>List is not shown</p>
+</ng-template>
+
+<input   #memberName />
+
+<p #p1 > </p>
+
+<button (click)="p1.textContent = memberName.value">
+  Set Name
+</button>
+
+<button (click)="empty()">
+  Empty
+</button>
+
+<button (click)="addMember(memberName.value)">
+   Add
+</button>
+
+<button (click)="show = !show">
+  {{show? "Hide" : "Show"}}
+</button>
+
+<!-- ng 4.0, else -->
+
+<!-- div is host element -->
+<div  [ngClass]="{highlight: isMouseOver}" 
+      *ngIf="show else notShown"
+      (mouseenter)="isMouseOver = true"
+      (mouseleave)="isMouseOver = false"
+
+      appHighlight="lightblue" 
+      
+      >
+  <ul>
+    <li *ngFor="let member of members">
+        {{member}}
+    </li>
+  </ul>
+</div>
+
+
+<p> About Likes {{aboutLikes}}></p>
+<app-like [(likes)]="aboutLikes">
+  
+</app-like>
+
+<button (click)="throwError()">
+  Throw
+</button>

@@ -1,0 +1,81 @@
+<h2>Home</h2>
+
+<!-- {{expression}} interpolation -->
+
+<p>Counter {{counter}} </p>
+
+<p>Counter * 10 ==> {{counter * 10}} </p>
+
+<!-- (name of the event)="expression" event binding -->
+
+<button (click)="increment()">
+  +1
+</button>
+
+<button on-click="decrement()">
+  -1
+</button>
+
+<button (click)="counter = counter + 2">
+  + 2
+</button>
+
+<!-- 
+  [] - property binding 
+  bind-propertyname
+-->
+
+<button [disabled]="counter % 2 == 1" >
+  Click Me
+</button>
+
+<input [value]="counter" />
+
+<input bind-value="counter * 10" />
+
+<p> Two way binding [()]  </p>
+
+<input name="c" [(ngModel)]="counter" type="number" />
+
+<!-- non sugar for two way binding -->
+
+<input name="c2" [ngModel]="counter"
+                 (ngModelChange)="counter = $event" 
+
+/>
+
+
+<p> Home Likes {{homeLikes}}</p>
+<!-- 
+<app-like [likes]="homeLikes"
+          (likesChange)="homeLikes = $event"
+>
+
+</app-like> -->
+
+
+<app-like [(likes)]="homeLikes"
+>
+
+</app-like>
+
+
+<p> Title {{title | uppercase}} </p>
+<p> Title {{title | lowercase}} </p>
+
+<p> Price {{price | currency }} </p>
+<p> Price {{price | currency:'INR' }} </p>
+<p> Price {{price | currency:'EUR' }} </p>
+
+<p> Date {{today  | date}}</p>
+
+<p> Date {{today  | date:'fullDate' | uppercase}}</p>
+
+
+<p> Date {{today  | date:'yyyy/MMM/dd'}}</p>
+
+<p> Power 2^3 ==> {{2 | power:3}} </p>
+
+<p> Power 2 ==> {{2 | power}} </p>
+
+<p> Power counter^2 ==> {{counter | power:2}} </p>

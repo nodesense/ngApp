@@ -1,0 +1,57 @@
+<h2>Product List</h2>
+
+<form>
+  <label>Field</label>
+  <select name="field" [(ngModel)]="selectedField">
+    <option [value]="fieldName" 
+            *ngFor="let fieldName of fields" >
+        {{fieldName}}
+    </option>
+  </select>
+
+  <label>Predicate</label>
+  <select name="predicate" [(ngModel)]="selectedPredicate">
+    <option [value]="predicate" 
+            *ngFor="let predicate of predicates" >
+        {{predicate}}
+    </option>
+  </select>
+
+  <label>Value</label>
+  <input name="expected" [(ngModel)]="expectedValue" type="number" />
+</form>
+
+<div>
+  <p>Condition: {{selectedField}} {{selectedPredicate}} {{expectedValue}}</p>
+</div>
+
+
+<div *ngFor="let product of (products$ | async | filter:selectedField:selectedPredicate:expectedValue)"
+     class="flex two"
+>
+   <app-product-widget [product]="product">
+
+   </app-product-widget>
+</div>  
+
+
+
+
+
+
+
+
+
+
+
+<!-- <select (change)="loadComponent($event.target.value)">
+  <option value='grid' selected>Grid</option>
+  <option value='table'>Table</option>
+</select> -->
+
+<!-- 
+<app-products-table [products]="(products$ | async)">
+
+</app-products-table> -->
+<!-- 
+<ng-template host-template ></ng-template> -->

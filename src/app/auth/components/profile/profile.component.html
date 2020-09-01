@@ -1,0 +1,11 @@
+<h2>User Profile</h2>
+
+<p> User name: {{authService.user?.name}}</p>
+
+<h4>Roles</h4>
+
+<ul>
+  <li *ngFor="let role of authService.user?.roles">
+    {{role}}
+  </li>
+</ul>

@@ -1,0 +1,20 @@
+<div>
+
+  <a routerLink="/" 
+     class="button" 
+     routerLinkActive="success"
+     [routerLinkActiveOptions]="{exact: true}"
+  > Home </a>
+
+  <a routerLink="/products" class="button" routerLinkActive="success"> Products </a>
+
+  <a routerLink="/cart" class="button" routerLinkActive="success"> Cart </a>
+  <a routerLink="/about" class="button" routerLinkActive="success"> About </a>
+  <a routerLink="/contact" class="button" routerLinkActive="success"> Contact </a>
+
+
+  <app-auth-menu></app-auth-menu>
+
+  <span>Amount {{amount$ | async | currency:'INR'}}</span>
+  <hr />
+</div>

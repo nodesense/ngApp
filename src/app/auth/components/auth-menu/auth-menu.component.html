@@ -1,0 +1,30 @@
+
+<a  routerLink="/auth/login"  
+class="button"  routerLinkActive="success" 
+*ngIf="!(authStatus$ | async) else logoutPart"
+>
+Login
+</a>
+
+<ng-template #logoutPart>
+
+
+<a  routerLink="/auth/profile"  
+    class="button"  
+    routerLinkActive="success" 
+> 
+Profile [{{(user$ | async)?.name}}]
+</a>
+
+
+<a  routerLink="/admin/users"  
+    class="button"  
+    routerLinkActive="success" 
+> 
+  Admin
+</a>
+
+<button (click)="logout()" >
+    Logout
+</button>
+</ng-template>

@@ -1,0 +1,27 @@
+Field Name
+<input name="selectedField" [(ngModel)]="selectedField" />
+Condition ( &gt; or &lt; ==  )
+<input name="predicate" [(ngModel)]="predicate" />
+Value
+<input name="expectedValue" [(ngModel)]="expectedValue" />
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Year</th>
+  </tr>
+
+  <tr *ngFor="let product of (products | filter:selectedField:predicate:expectedValue | sort:'price')  ">
+    <td>
+        <a [routerLink]="['/products', 'edit', product.id, {source:'list'}]" >
+    
+      {{product.name}}
+
+      </a>
+    </td>
+    <td>{{product.price}}</td>
+    <td>{{product.year}}</td>
+  </tr>
+    
+</table>

@@ -1,0 +1,18 @@
+<article class="card" appHighlight="lightyellow">
+  <header>
+    <h2>{{product.name}}</h2>
+  </header>
+
+  <p>Weight: {{product.weight}}</p>
+  <p>Year: {{product.year}}</p>
+  <p>Price: {{product.price}}</p>
+
+  <footer>
+    <button (click)="addToCart(product)">
+      +Cart
+    </button>
+    <a [routerLink]="['/products', 'edit', product.id, {source:'list'}]" class="button">
+      Edit
+    </a>
+  </footer>
+</article>
