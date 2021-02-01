@@ -17,7 +17,7 @@ fdescribe('ProductService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule], // mock the apis call
       providers: [ProductService]
 
     });
@@ -39,7 +39,7 @@ fdescribe('ProductService', () => {
       expect(1 + 2).toBe(3);
       done();
     }, 20000);
-  }, 30000);
+  }, 30000); // total timeout for this particular test
  
   it('should return good response with data', (doneFn) => {
      console.log("TEstme ")

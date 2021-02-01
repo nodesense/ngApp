@@ -7,22 +7,30 @@ fdescribe('CartComponent', () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
 
+  // initialize test environment
   beforeEach(async(() => {
+    // create a new module, only for testing
     TestBed.configureTestingModule({
+      imports: [ 
+        // other modules
+       // material modules
+      ],
       declarations: [ CartComponent ],
       providers: [
         DataService
       ]
     })
-    .compileComponents();
+    .compileComponents(); // jit compiling the html into js 
   }));
 
   beforeEach(() => {
+    // All DI to be resolved
     fixture = TestBed.createComponent(CartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
+  // test case/spec
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -47,7 +55,7 @@ fdescribe('CartComponent', () => {
   // html functionalitied
  
   it("should be initialize called", () => {
-    let element = fixture.nativeElement;
+    let element = fixture.nativeElement; // Real HTML DOM
      
     expect(element.querySelectorAll('p')[0].textContent)
           .toContain("Counter: 0"); 
